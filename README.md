@@ -1,6 +1,6 @@
 # AI Chatbot
 
-Welcome to the AI Chatbot project! This project aims to build an intelligent chatbot using state-of-the-art natural language processing techniques. The bot can understand and respond to user inputs in a conversational manner.
+Welcome to the AI Chatbot project! This project aims to build a bot that can understand and respond to user inputs in a conversational manner.
 
 ## Installation
 
