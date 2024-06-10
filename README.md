@@ -19,6 +19,9 @@ To get started with the AI Chatbot, follow these steps:
     ```
 
 3. **Install dependencies**
+    ```sh
+    pip install flask
+    ```
 
 4. **Run the application**:
     ```sh
