@@ -1,3 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	h1 {
+		@apply text-4xl font-extrabold scroll-m-20 lg:text-5xl xl:text-7xl;
+	}
+
+	h2 {
+		@apply scroll-m-20 text-3xl font-semibold first:mt-0;
+	}
+
+	h3 {
+		@apply scroll-m-20 text-2xl font-semibold;
+	}
+
+	h4 {
+		@apply scroll-m-20 text-xl font-semibold;
+	}
+
+	p {
+		@apply leading-7 [&:not(:first-child)]:mt-6;
+	}
+
+	blockqoute {
+		@apply pl-6 mt-6 italic border-l-2;
+	}
+
+	ul {
+		@apply my-6 ml-6 list-disc [&>li]:mt-2;
+	}
+
+	.lead {
+		color: #eee;
+		@apply text-xl;
+	}
+
+	.large {
+		@apply text-lg font-semibold;
+	}
+
+	small {
+		@apply text-sm font-medium leading-none;
+	}
+
+	.muted {
+		color: #eee;
+		@apply text-sm;
+	}
+}
+
+html {
+	font-family: 'Urbanist', sans-serif;
+}
