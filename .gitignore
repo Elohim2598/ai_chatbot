@@ -8,6 +8,7 @@
 /frontend/!.env.example
 /frontend/vite.config.js.timestamp-*
 /frontend/vite.config.ts.timestamp-*
+.venv
 
 /frontend/pnpm-lock.yaml
 /frontend/package-lock.json
