@@ -2,7 +2,7 @@
 	import { teamMembers } from './constants';
 </script>
 
-<div class="relative w-full flex flex-col items-center justify-center">
+<div class="relative min-h-screen w-full flex flex-col items-center justify-center">
 	<ul
 		class="flex flex-col justify-evenly gap-5
             sm:flex-row sm:w-2/3
