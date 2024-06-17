@@ -72,6 +72,9 @@
 					</button>
 				{/each}
 				<a href="#" class="w-full flex justify-center"><u>Forgot your password?</u></a>
+				<a href="/auth/register" class="w-full flex justify-center"
+					>Don't have an account yet? <u>Sign up</u></a
+				>
 			</div>
 		</form>
 	</div>
