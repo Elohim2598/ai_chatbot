@@ -1,5 +1,4 @@
 <script>
-	import '../../app.css';
 	import Footing from '../../components/ui/footing/Footing.svelte';
 	import Heading from '../../components/ui/heading/Heading.svelte';
 </script>

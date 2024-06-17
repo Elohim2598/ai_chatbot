@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '../../../app.css';
 	// State variables
 	let showPassword: Boolean = false;
 
@@ -18,7 +17,7 @@
 	];
 </script>
 
-<div class="relative min-h-screen flex flex-col items-center justify-center">
+<div class="relative flex flex-col">
 	<div
 		class="w-full max-w-md space-y-8 relative min-h-screen flex flex-col items-center justify-center"
 	>
