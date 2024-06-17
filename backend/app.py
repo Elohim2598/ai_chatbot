@@ -1,6 +1,8 @@
 from flask import Flask
 from routes.v1.v1 import v1
 
+from db.supabase import supabase
+
 app = Flask(__name__)
 
 @app.route('/')
