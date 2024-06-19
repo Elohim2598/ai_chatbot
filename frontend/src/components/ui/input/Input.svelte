@@ -14,20 +14,19 @@
 			bind:value={prompt}
 			type="text"
 			class={`p-2 w-2/5 outline-none
-            border-b-2 border-t-2 border-l-2
+            border-y-2 border-l-2
             rounded-bl-2xl rounded-tl-2xl
             ${prompt.length > 2 ? '' : fadeIn}`}
 		/>
 		<div
 			class={`pr-1 flex items-center text-fluid-xs
-                border-b-2 border-t-2 border-r-2
+                border-y-2 border-r-2
                 rounded-br-2xl rounded-tr-2xl
                 ${prompt.length > 2 ? unHide : 'opacity-0'}
               `}
 		>
 			<button
-				on:click={() => {}}
-				class={`px-[.75rem] py-[.35rem] border-[1px] border-black rounded-xl
+				class={`px-2 py-1 border border-black rounded-xl
               ${prompt.length > 2 ? unHide : 'opacity-0 hidden'}`}
 			>
 				Send

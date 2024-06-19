@@ -1,4 +1,4 @@
-<div class="fixed top-0 w-full border-b-[1px] border-black">
+<div class="fixed top-0 w-full border-b border-black">
 	<div class="ml-10 mr-10 flex justify-end items-center">
 		<ul class="my-0 h-16 flex justify-between gap-10 items-center text-fluid-md">
 			<li class="flex items-center">
