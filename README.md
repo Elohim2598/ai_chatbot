@@ -6,37 +6,39 @@ Welcome to the AI Chatbot project! This project aims to build a bot that can und
 
 To get started with the AI Chatbot, follow these steps:
 
-1. **Clone the repository**:
-    ```sh
-    git clone https://github.com/elohim2598/ai-chatbot.git
-    cd ai-chatbot
-    ```
+**BACKEND:**
+1. **Install Python 3**.
+2. Once inside the directory **`/<project-name>/backend`**, run the following command: `python -m venv .venv`.
+3. This will create the **virtual environment** for your project.
+4. Next you're looking to **activate your environment** which is done after running the **`activate`** script. It can be found at `<project-name>/backend/.venv/Scripts`.<br /><br />
+5. **Once inside the `Scripts` folder**, you can run `source activate` to activate your environment.<br /><br /> Alternatively, if **you're still at the `<project-name>/backend` directory**, you can **run `source /.venv/Scripts/activate`** and that will achieve the same result.<br /><br />
+6. At the **`<project-name>/backend` directory**, you can run `pip install -r requirements.txt` to **install the project dependencies.**
+7. Once installed, you can run bash command `flask run` or `flask run --debug` to **start the server.**
 
-2. **Set up a virtual environment**:
-    ```sh
-    python3 -m venv venv
-    source venv/bin/activate   # On Windows, use `venv\Scripts\activate`
-    ```
+**This project depends on `.env` variables. You can contact the project administrator to receive them or create your own.**
 
-3. **Install dependencies**
-    ```sh
-    pip install flask
-    ```
+<hr />
 
-4. **Run the application**:
-    ```sh
-    python server.py
-    ```
+**FRONTEND:**
+1. You basically have to set up **Svelte** with **Vite**.
+2. Should be pretty easy since you just have to do **`pnpm i`** or **`npm i`** after opening bash **in the frontend directory.**
+3. **Run the project** with `pnpm dev` or `npm run dev`.
+
 
 ## Contributing
 
 To contribute to this project, follow these steps:
-
-1. **Fork the repository**.
-2. **Create a new branch** (`git checkout -b feature/your-feature`).
-3. **Commit your changes** (`git commit -m 'Add your feature'`).
-4. **Push to the branch** (`git push origin feature/your-feature`).
-5. **Open a Pull Request**.
+1. **Create a new folder with the project identifier.**
+2. **Initialize `git` with the bash command `git init`.**
+3. **Get the SSH of the source project i.e `git@github.com:Elohim2598/ai_chatbot.git` or from your own fork.**<sub>( it can be found under the code button in SSH tab. )</sub>
+4. **Run the bash command `git remote add origin git@github.com:Elohim2598/ai_chatbot.git` <br /> or <br /> `git remote add origin <fork-ssh-goes-here>`.**
+5. **Run the bash command `git pull`.**
+6. **Checkout to your feature branch with bash command `git checkout -b <feature-name>`.**
+7. **Make changes, create new files etc.**
+8. **Push changes to repo with `git push -u origin <feature-name>`.**
+9. **Create Pull Request through the Pull Request section of the project.**
+10. **Request Review.**
+11. **PR is merged after passing review.**
 
 Please ensure your code adheres to the project's coding standards.
 
@@ -44,84 +46,43 @@ Please ensure your code adheres to the project's coding standards.
 
 Regarding the folder structure, we plan to organize it as follows:
 
-ai-chatbot/\
-├── backend\
-│ ├── app.py # Main Flask application\
-│ ├── requirements.txt # Python dependencies\
-│ ├── Dockerfile # Dockerfile for the backend\
-│ ├── .env # Environment variables\
-│ ├── models/ # Directory for AI models\
-│ │ └── model.py # Code to load/use the Hugging Face model\
-│ ├── routes/ # Flask routes\
-│ │ ├── init.py\
-│ │ └── chatbot.py # Route for chatbot API\
-│ ├── static/ # Static files (if any)\
-│ └── templates/ # HTML templates (if any)\
-│ └── index.html\
-├── frontend/\
-│ ├── public/\
-│ │ └── index.html # Entry point for the Svelte app\
-│ ├── src/\
-│ │ ├── App.svelte # Main Svelte component\
-│ │ ├── components/ # Svelte components\
-│ │ │ └── ChatBox.svelte\
-│ │ ├── stores/ # Svelte stores\
-│ │ │ └── chatbotStore.js\
-│ │ └── main.js # Main JavaScript file\
-│ ├── package.json # Node.js dependencies\
-│ ├── package-lock.json # Lock file for dependencies\
-│ ├── rollup.config.js # Rollup configuration for building the Svelte app\
-│ └── Dockerfile # Dockerfile for the frontend\
-├── tests/\
-│ ├── backend/\
-│ │ ├── test_app.py # Tests for the Flask app\
-│ │ └── test_chatbot.py # Tests for the chatbot API\
-│ └── frontend/\
-│ └── test_chatbox.js # Tests for the Svelte components\
-├── .gitignore # Git ignore file\
-├── docker-compose.yml # Docker Compose file for multi-container setup\
-├── README.md # Project documentation\
-└── LICENSE # License file\
+**With respect to backend:**
+```txt
+backend/
+├── .venv # Scripts and dependencies for the backend.
+├── db/
+│   ├── supabase.py
+│   └── --------------------
+├── routes/
+│   └── v1/
+│       ├── handlers/
+│       │   ├── heartbeat.py
+│       │   ├── hello.py
+│       │   ├── <more-handlers>.py
+│       │   └── --------------------
+│       ├── v1.py # Contains handlers and wraps them with `/api/v1/`.
+│       └── --------------------
+├── services/
+│   ├── chat.py
+│   ├── <more-services>.py
+│   └── --------------------
+├── app.py
+├── .env # Contains your environment variables.
+├── requirements.txt # Contains project requirements.
+└── --------------------
+frontend
+---------
+.gitignore
+README.md
 
-## Backend (Flask)
-
-- **app.py**: Main entry point for the Flask application.
-- **requirements.txt**: Lists all the Python dependencies.
-- **Dockerfile**: Defines the Docker image for the backend.
-- **.env**: Contains environment variables (e.g., API keys, database URLs).
-- **models/**: Directory for AI models, with a script to load the Hugging Face model.
-- **routes/**: Contains the Flask routes, with a specific route for the chatbot API.
-- **static/**: (Optional) Contains static files if needed.
-- **templates/**: (Optional) Contains HTML templates if needed.
-
-## Frontend (Svelte)
-
-- **public/**: Contains the main HTML entry point for the Svelte app.
-- **src/**: Contains the main Svelte components, stores, and JavaScript files.
-  - **App.svelte**: Main Svelte component.
-  - **components/**: Directory for additional Svelte components.
-  - **stores/**: Directory for Svelte stores.
-  - **main.js**: Main JavaScript file to bootstrap the Svelte app.
-- **package.json**: Lists Node.js dependencies.
-- **package-lock.json**: Lock file for Node.js dependencies.
-- **rollup.config.js**: Configuration for Rollup, used to build the Svelte app.
-- **Dockerfile**: Defines the Docker image for the frontend.
-
-## Tests
-
-- **tests/backend/**: Contains tests for the Flask backend.
-  - **test_app.py**: Tests for the main Flask application.
-  - **test_chatbot.py**: Tests for the chatbot API.
-- **tests/frontend/**: Contains tests for the Svelte frontend.
-  - **test_chatbox.js**: Tests for the Svelte components.
+```
 
 ## Root Directory
 
 - **.gitignore**: Specifies files and directories to be ignored by Git.
-- **docker-compose.yml**: Defines multi-container Docker applications.
 - **README.md**: Project documentation.
 - **LICENSE**: License file for the project.
 
-## _Remember we are open to changes so this might not be the final file structure, suggestions are very welcome._
+<hr />
 
-
+### Project documentation is `in progress`.
