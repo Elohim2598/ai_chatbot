@@ -4,7 +4,7 @@
 	export let disabled: boolean = false;
 	export let onClick: (event: MouseEvent) => void;
 	export let variant: string = 'primary';
-	export let size: string = 'edium';
+	export let size: string = 'medium';
 
 	function getClass(variant: string, size: string): string {
 		return `${variant} ${size}`;
