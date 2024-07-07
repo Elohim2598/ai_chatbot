@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { createForm } from 'svelte-forms-lib';
+	import * as yup from 'yup';
+
 	// State variables
 	let showPassword: Boolean = false;
 
@@ -15,6 +18,20 @@
 			buttonType: 'button' as const
 		}
 	];
+
+	const { form, errors, handleChange, handleSubmit } = createForm({
+		initialValues: {
+			email: '',
+			password: ''
+		},
+		validationSchema: yup.object().shape({
+			email: yup.string().email('Invalid email address').required('Email is required'),
+			password: yup.string().required('Password is required')
+		}),
+		onSubmit: (values) => {
+			alert(JSON.stringify(values));
+		}
+	});
 </script>
 
 <div class="relative min-h-screen flex flex-col items-center justify-center">
@@ -28,7 +45,12 @@
 		</div>
 
 		<!-- Form -->
-		<form action="/login" method="POST" class="mt-8 space-y-6 flex flex-wrap w-full">
+		<form
+			action="/login"
+			method="POST"
+			class="mt-8 space-y-2 flex flex-wrap w-full"
+			on:submit={handleSubmit}
+		>
 			<!-- Email input -->
 			<div class="w-full px-3">
 				<label for="email" class="block uppercase tracking-wide text-gray-700 text-sm font-bold"
@@ -36,20 +58,30 @@
 				>
 				<input
 					id="email"
+					name="email"
 					type="text"
 					class="block w-full bg-white text-gray-700 border py-3 px-3"
+					on:change={handleChange}
+					on:blur={handleChange}
+					bind:value={$form.email}
 				/>
 			</div>
-
+			{#if $errors.email}
+				<p class="text-red-500 text-sm px-4">{$errors.email}</p>
+			{/if}
 			<!-- Password input -->
 			<div class="w-full px-3">
 				<label for="pw" class="block uppercase tracking-wide text-gray-700 text-sm font-bold"
 					>*PASSWORD</label
 				>
 				<input
-					id="pw"
+					id="password"
+					name="password"
 					type={showPassword ? 'text' : 'password'}
 					class="block w-full bg-white text-gray-700 border py-3 px-3"
+					on:change={handleChange}
+					on:blur={handleChange}
+					bind:value={$form.password}
 				/>
 				<button
 					type="button"
@@ -63,7 +95,9 @@
 					{/if}
 				</button>
 			</div>
-
+			{#if $errors.password}
+				<p class="text-red-500 text-sm px-4">{$errors.password}</p>
+			{/if}
 			<!-- Buttons -->
 			<div class="w-11/12 mx-auto">
 				{#each buttons as button}
@@ -72,6 +106,9 @@
 					</button>
 				{/each}
 				<a href="#" class="w-full flex justify-center"><u>Forgot your password?</u></a>
+				<a href="/auth/register" class="w-full flex justify-center"
+					>Don't have an account yet? <u>Sign up</u></a
+				>
 			</div>
 		</form>
 	</div>
