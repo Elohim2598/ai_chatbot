@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'AI Chatbot Demonstration - Svelte + Supabase + Python + Flask'
 
 app.register_blueprint(v1)
 
