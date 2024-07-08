@@ -18,10 +18,9 @@
 				.required('Password is required'),
 			confirmPassword: yup
 				.string()
-				.oneOf([yup.ref('password'), null], 'Passwords must match')
+				.oneOf([yup.ref('password')], 'Passwords must match')
 				.required('Confirm password is required')
 		}),
-
 		onSubmit: (values) => {
 			alert(JSON.stringify(values));
 		}
@@ -39,12 +38,7 @@
 		</div>
 
 		<!-- Form -->
-		<form
-			action="/signup"
-			method="POST"
-			class="mt-8 space-y-2 flex flex-wrap w-full"
-			on:submit={handleSubmit}
-		>
+		<form action="?/signup" method="POST" class="mt-8 space-y-2 flex flex-wrap w-full">
 			<!-- Name input -->
 			<div class="w-full px-3">
 				<label for="name" class="block uppercase tracking-wide text-gray-700 text-sm font-bold"
