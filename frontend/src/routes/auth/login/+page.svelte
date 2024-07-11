@@ -45,12 +45,7 @@
 		</div>
 
 		<!-- Form -->
-		<form
-			action="/login"
-			method="POST"
-			class="mt-8 space-y-2 flex flex-wrap w-full"
-			on:submit={handleSubmit}
-		>
+		<form action="?/login" method="POST" class="mt-8 space-y-2 flex flex-wrap w-full">
 			<!-- Email input -->
 			<div class="w-full px-3">
 				<label for="email" class="block uppercase tracking-wide text-gray-700 text-sm font-bold"
@@ -105,7 +100,7 @@
 						{button.content}
 					</button>
 				{/each}
-				<a href="#" class="w-full flex justify-center"><u>Forgot your password?</u></a>
+				<a href="/forgot" class="w-full flex justify-center"><u>Forgot your password?</u></a>
 				<a href="/auth/register" class="w-full flex justify-center"
 					>Don't have an account yet? <u>Sign up</u></a
 				>
