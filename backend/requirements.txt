@@ -6,6 +6,7 @@ click==8.1.7
 colorama==0.4.6
 deprecation==2.1.0
 Flask==3.0.3
+flask-cors
 gotrue==2.4.4
 h11==0.14.0
 httpcore==1.0.5
@@ -30,3 +31,6 @@ supafunc==0.4.6
 typing_extensions==4.12.2
 websockets==12.0
 Werkzeug==3.0.3
+groq
+pytest
+pytest-mock

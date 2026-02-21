@@ -25,6 +25,6 @@
 </div>
 
 <!-- Content -->
-<div class="relative z-10 min-h-screen flex flex-col items-center justify-center">
+<div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
 	<slot />
 </div>

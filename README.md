@@ -1,88 +1,257 @@
 # AI Chatbot
 
-Welcome to the AI Chatbot project! This project aims to build a bot that can understand and respond to user inputs in a conversational manner.
+A full-stack AI chatbot built with a **Flask** backend and a **SvelteKit** frontend. Conversations are powered by **Groq** (Llama 3.3 70B), authentication is handled by **Supabase**, and the UI features a dark copper-toned design with GSAP animations.
 
-## Installation
+---
 
-To get started with the AI Chatbot, follow these steps:
+## Tech Stack
 
-**BACKEND:**
-1. **Install Python 3**.
-2. Once inside the directory **`/<project-name>/backend`**, run the following command: `python -m venv .venv`.
-3. This will create the **virtual environment** for your project.
-4. Next you're looking to **activate your environment** which is done after running the **`activate`** script. It can be found at `<project-name>/backend/.venv/Scripts`.<br /><br />
-5. **Once inside the `Scripts` folder**, you can run `source activate` to activate your environment.<br /><br /> Alternatively, if **you're still at the `<project-name>/backend` directory**, you can **run `source /.venv/Scripts/activate`** and that will achieve the same result.<br /><br />
-6. At the **`<project-name>/backend` directory**, you can run `pip install -r requirements.txt` to **install the project dependencies.**
-7. Once installed, you can run bash command `flask run` or `flask run --debug` to **start the server.**
+| Layer | Technology |
+|---|---|
+| Frontend | SvelteKit + TypeScript + Tailwind CSS |
+| Backend | Python + Flask |
+| AI | Groq API — `llama-3.3-70b-versatile` |
+| Auth | Supabase (email/password) |
+| Animations | GSAP |
 
-**This project depends on `.env` variables. You can contact the project administrator to receive them or create your own.**
-
-<hr />
-
-**FRONTEND:**
-1. You basically have to set up **Svelte** with **Vite**.
-2. Should be pretty easy since you just have to do **`pnpm i`** or **`npm i`** after opening bash **in the frontend directory.**
-3. **Run the project** with `pnpm dev` or `npm run dev`.
-
-
-## Contributing
-
-To contribute to this project, follow these steps:
-1. **Create a new folder with the project identifier.**
-2. **Initialize `git` with the bash command `git init`.**
-3. **Get the SSH of the source project i.e `git@github.com:Elohim2598/ai_chatbot.git` or from your own fork.**<sub>( it can be found under the code button in SSH tab. )</sub>
-4. **Run the bash command `git remote add origin git@github.com:Elohim2598/ai_chatbot.git` <br /> or <br /> `git remote add origin <fork-ssh-goes-here>`.**
-5. **Run the bash command `git pull`.**
-6. **Checkout to your feature branch with bash command `git checkout -b <feature-name>`.**
-7. **Make changes, create new files etc.**
-8. **Push changes to repo with `git push -u origin <feature-name>`.**
-9. **Create Pull Request through the Pull Request section of the project.**
-10. **Request Review.**
-11. **PR is merged after passing review.**
-
-Please ensure your code adheres to the project's coding standards.
+---
 
 ## Project Structure
 
-Regarding the folder structure, we plan to organize it as follows:
-
-**With respect to backend:**
-```txt
-backend/
-├── .venv # Scripts and dependencies for the backend.
-├── db/
-│   ├── supabase.py
-│   └── --------------------
-├── routes/
-│   └── v1/
-│       ├── handlers/
-│       │   ├── heartbeat.py
-│       │   ├── hello.py
-│       │   ├── <more-handlers>.py
-│       │   └── --------------------
-│       ├── v1.py # Contains handlers and wraps them with `/api/v1/`.
-│       └── --------------------
-├── services/
-│   ├── chat.py
-│   ├── <more-services>.py
-│   └── --------------------
-├── app.py
-├── .env # Contains your environment variables.
-├── requirements.txt # Contains project requirements.
-└── --------------------
-frontend
----------
-.gitignore
-README.md
-
+```
+ai_chatbot/
+├── backend/
+│   ├── db/
+│   │   └── supabase.py          # Supabase client
+│   ├── routes/
+│   │   └── v1/
+│   │       ├── v1.py            # Blueprint — mounts all routes at /api/v1
+│   │       ├── chat.py          # POST /api/v1/chat
+│   │       └── heartbeat.py     # GET  /api/v1/heartbeat
+│   ├── app.py                   # Flask entry point
+│   ├── groq_client.py           # Groq client
+│   ├── requirements.txt
+│   └── .env                     # Environment variables (not committed)
+│
+├── frontend/
+│   ├── src/
+│   │   ├── routes/
+│   │   │   ├── (landing)/           # Public landing page
+│   │   │   │   ├── +layout.svelte   # Dark copper background
+│   │   │   │   └── +page.svelte     # Landing page
+│   │   │   ├── (protected)/
+│   │   │   │   └── chat/
+│   │   │   │       └── +page.svelte # Main chat UI
+│   │   │   ├── auth/
+│   │   │   │   ├── +layout.svelte   # Shared dark background for auth pages
+│   │   │   │   ├── login/           # Login form
+│   │   │   │   ├── register/        # Registration form
+│   │   │   │   ├── logout/          # Logout action (POST only)
+│   │   │   │   └── error/           # Auth error page
+│   │   │   ├── +layout.svelte
+│   │   │   ├── +layout.ts
+│   │   │   └── +layout.server.ts
+│   │   ├── hooks.server.ts          # Supabase auth + route guard
+│   │   └── app.css
+│   ├── package.json
+│   └── .env                         # Public env vars (not committed)
+│
+└── README.md
 ```
 
-## Root Directory
+---
 
-- **.gitignore**: Specifies files and directories to be ignored by Git.
-- **README.md**: Project documentation.
-- **LICENSE**: License file for the project.
+## Prerequisites
 
-<hr />
+- **Python 3.10+**
+- **Node.js 18+**
+- A [Supabase](https://supabase.com) project
+- A [Groq](https://console.groq.com) API key
 
-### Project documentation is `in progress`.
+---
+
+## Setup
+
+### 1. Clone the repository
+
+```bash
+git clone git@github.com:Elohim2598/ai_chatbot.git
+cd ai_chatbot
+```
+
+### 2. Backend
+
+```bash
+cd backend
+
+# Create and activate a virtual environment
+python -m venv .venv
+source .venv/Scripts/activate   # Windows
+# source .venv/bin/activate     # macOS / Linux
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+Create a `.env` file in the `backend/` directory:
+
+```env
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_KEY=your_supabase_anon_key
+GROQ_API_KEY=your_groq_api_key
+```
+
+Start the backend:
+
+```bash
+python app.py
+# Runs at http://127.0.0.1:5000
+```
+
+Run backend tests:
+
+```bash
+python -m pytest tests/ -v
+```
+
+> **Note:** Flask does not hot-reload `.env` changes. Restart the server after editing `.env`.
+
+### 3. Frontend
+
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env` file in the `frontend/` directory:
+
+```env
+PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+Start the frontend:
+
+```bash
+npm run dev
+# Runs at http://localhost:5173
+```
+
+Run frontend tests:
+
+```bash
+npm test
+```
+
+---
+
+## API Reference
+
+### `POST /api/v1/chat`
+
+Send a message and receive a reply from the AI.
+
+**Headers**
+
+```
+Authorization: Bearer <supabase_access_token>
+Content-Type: application/json
+```
+
+**Request body**
+
+```json
+{
+  "message": "What is the capital of France?",
+  "history": [
+    { "role": "user",  "parts": ["Hello!"] },
+    { "role": "model", "parts": ["Hi! How can I help you?"] }
+  ]
+}
+```
+
+- `message` — the current user message (required)
+- `history` — previous turns in the conversation (optional, pass `[]` for the first message)
+
+**Response**
+
+```json
+{
+  "reply": "The capital of France is Paris."
+}
+```
+
+**Error response**
+
+```json
+{
+  "error": "Unauthorized"
+}
+```
+
+| Status | Meaning |
+|---|---|
+| `200` | Success |
+| `400` | Missing `message` field |
+| `401` | Missing or invalid auth token |
+| `500` | Groq API error |
+
+---
+
+### `GET /api/v1/heartbeat`
+
+Health check — returns `OK`.
+
+---
+
+## Authentication
+
+Authentication is handled by **Supabase**. The app supports email/password sign-up and login.
+
+| Route | Description |
+|---|---|
+| `/auth/register` | Create a new account |
+| `/auth/login` | Log in to an existing account |
+| `/auth/logout` | Sign out (form POST action) |
+| `/chat` | Protected — redirects to `/auth/login` if not authenticated |
+
+The route guard lives in `frontend/src/hooks.server.ts`. Any route inside `(protected)/` requires an active Supabase session.
+
+---
+
+## Environment Variables
+
+### Backend — `backend/.env`
+
+| Variable | Description |
+|---|---|
+| `SUPABASE_URL` | Your Supabase project URL |
+| `SUPABASE_KEY` | Your Supabase `anon` public key |
+| `GROQ_API_KEY` | Your Groq API key |
+
+### Frontend — `frontend/.env`
+
+| Variable | Description |
+|---|---|
+| `PUBLIC_SUPABASE_URL` | Your Supabase project URL |
+| `PUBLIC_SUPABASE_ANON_KEY` | Your Supabase `anon` public key |
+
+---
+
+## Contributing
+
+1. Fork the repository and clone your fork.
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Make your changes and commit: `git commit -m "Add your feature"`
+4. Push to your fork: `git push origin feature/your-feature`
+5. Open a Pull Request against `main` and request a review.
+
+Please keep pull requests focused — one feature or fix per PR.
+
+---
+
+## Known Limitations
+
+- **Conversation history is not persisted** — refreshing the page clears the chat. Database persistence is a planned feature.
+- **Groq free tier** — subject to rate limits (15 requests/min, 1,500/day on the free plan).
+- **Single user per session** — no multi-user conversation support yet.
