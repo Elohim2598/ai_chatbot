@@ -10,7 +10,6 @@
 /frontend/vite.config.ts.timestamp-*
 
 /frontend/pnpm-lock.yaml
-/frontend/package-lock.json
 
 # BACKEND
 .venv
